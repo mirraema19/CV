@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/organisms/header";
 import Inicio from "./pages/inicio";
-import AboutMe from "./pages/aboutme";
-import Proyectos from "./pages/proyectos";
+import Tacos from "./pages/tacos";
+import Refrescos from "./pages/refresco";
 import Footer from "./components/organisms/footer";
-import idiomas from "./idiomas";
+import idiomas from "./informacion";
 import "./App.css";
 
 function App() {
@@ -12,18 +13,22 @@ function App() {
     const idiomaGuardado = localStorage.getItem("Idioma");
     return idiomaGuardado || "es";
   });
+
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("ModoOscuro") === "true" ? true : false
   );
-  const txtIdioma = idiomas[idioma];
+
+  const [txtIdioma, setTxtIdioma] = useState(idiomas[idioma]);
+  const [menuMobile, setMenuMobile] = useState(false); 
 
   const bodyOverflowHidden = () => {
-    document.body.classList.toggle("overflow--hiden");
+    document.body.classList.toggle("overflow--hidden");
   };
 
   const cambiarIdioma = (nuevoIdioma) => {
     setIdioma(nuevoIdioma);
     localStorage.setItem("Idioma", nuevoIdioma);
+    setTxtIdioma(idiomas[nuevoIdioma]);
   };
 
   const cambiarModo = () => {
@@ -40,20 +45,34 @@ function App() {
     }
   }, [darkMode]);
 
+  const toggleMenu = () => {
+    setMenuMobile(!menuMobile); 
+    bodyOverflowHidden(); 
+  };
+
   return (
-    <main className="App">
-      <Header
-        cambiarModo={cambiarModo}
-        darkMode={darkMode}
-        cambiarIdioma={cambiarIdioma}
-        txtIdioma={txtIdioma}
-        bodyOverflowHidden={bodyOverflowHidden}
-      />
-      <Inicio txtIdioma={txtIdioma} />
-      <AboutMe txtIdioma={txtIdioma} />
-      <Proyectos txtIdioma={txtIdioma} />
-      <Footer txtIdioma={txtIdioma} />
-    </main>
+    <Router>
+      <main className={`App ${darkMode ? "dark-mode" : ""}`}>
+        <Header
+          cambiarModo={cambiarModo}
+          darkMode={darkMode}
+          cambiarIdioma={cambiarIdioma}
+          txtIdioma={txtIdioma}
+          bodyOverflowHidden={bodyOverflowHidden}
+          toggleMenu={toggleMenu} 
+        />
+
+        {/* Rutas */}
+        <Routes>
+  <Route path="/" element={<Inicio txtIdioma={txtIdioma} />} />
+  <Route path="/tacos" element={<Tacos txtIdioma={txtIdioma} />} />
+  <Route path="/refrescos" element={<Refrescos txtIdioma={txtIdioma} />} />
+</Routes>
+
+
+        <Footer txtIdioma={txtIdioma} />
+      </main>
+    </Router>
   );
 }
 

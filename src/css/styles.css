@@ -1,6 +1,7 @@
 /* Modal */
 
 .modal {
+  z-index: 9999;
   position: fixed;
   color: black;
   display: flex;
@@ -60,6 +61,14 @@
   gap: 15px;
 }
 
+
+.telefono {
+  font-size: 17px; 
+  font-family: sans-serif; 
+  color: #0c0c0c; 
+
+}
+
 .social-links:hover {
   color: blue;
 }
@@ -87,11 +96,13 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 100px;
+   border-bottom: 2px solid #ee0a0a;
 }
 
 .header-titulo {
   font-family: "Shantell Sans", sans-serif;
   font-weight: normal;
+  
 }
 
 .header-img {
@@ -137,7 +148,7 @@ ul li:hover {
 }
 
 .dark-mod-boton,
-.boton-idioma {
+.boton-carrito {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,7 +162,7 @@ ul li:hover {
 }
 
 .dark-mod-boton:hover,
-.boton-idioma:hover {
+.boton-carrito:hover {
   color: red !important;
 }
 
@@ -161,6 +172,8 @@ ul li:hover {
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+  z-index: 9999;
+  
 }
 
 .linea {
@@ -197,6 +210,7 @@ ul li:hover {
 #inicio {
   height: 90vh;
   justify-content: space-between;
+  border-bottom: 2px solid #ee0a0a;
 }
 
 .inicio-container {
@@ -206,7 +220,6 @@ ul li:hover {
 }
 
 .inicio-logo {
-  height: 250px;
   width: 250px;
   border-radius: 50px;
 }
@@ -263,32 +276,20 @@ ul li:hover {
   transform: translateX(10px);
 }
 
-/* About Me */
-
-#aboutme {
-  height: 35%;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.aboutme-container {
-  border: solid 2px #2dc4e7;
-  font-size: 19px;
-  padding: 20px;
-  place-content: space-around;
-  display: grid;
-  text-align: justify;
-  border-radius: 10px;
-  height: 50%;
-}
-
 /* Proyectos */
 
-#proyectos {
-  height: 50%;
+#tacos {
+  height: 100%;
   flex-direction: column;
   justify-content: space-around;
-  border-bottom: 2px solid #c4c4c4;
+  border-bottom: 2px solid #ee0a0a;
+}
+
+#refresco {
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom: 2px solid #ee0a0a;
 }
 
 /* Footer */
@@ -299,6 +300,7 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   height: 120px;
+  margin-top: 50px;
 }
 
 .footer-titulo {
@@ -318,12 +320,31 @@ footer {
   display: flex;
   align-items: center;
   border: none;
-  background-color: #f0f0f0;
+  background-color: #d8d0d0;
   border-radius: 5px;
   gap: 8px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  margin-top: 15px;
 }
+
+.footer-direccion {
+  margin-top: 15px; /* Ajusta según sea necesario */
+}
+
+.footer-empresa {
+  margin-top: 15px; /* Ajusta según sea necesario */
+  display: flex;
+  align-items: center;
+}
+
+.footer-empresa img {
+  width: 70px; /* Ajusta según el tamaño deseado */
+  height: 60px; /* Ajusta según el tamaño deseado */
+  margin-right: 10px; /* Espacio entre la imagen y el nombre */
+}
+
+
 
 .footer-boton:hover {
   color: white;
@@ -371,6 +392,7 @@ footer {
 @media screen and (min-width: 769px) {
   .hamburguesa {
     display: none;
+    z-index: 9999;
   }
 }
 
@@ -380,7 +402,7 @@ footer {
   }
 
   .boton-contacto,
-  .boton-idioma,
+  .boton-carrito,
   .dark-mod-boton {
     display: none;
   }
@@ -440,7 +462,7 @@ footer {
     border: none;
   }
 
-  .idiomas {
+  .boton-carrito {
     flex-direction: row;
     margin: 0;
   }

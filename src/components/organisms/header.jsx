@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FiSun, FiMoon } from "react-icons/fi";
-import { HiOutlineTranslate } from "react-icons/hi";
+import { FaSun, FaMoon, FaShoppingCart } from "react-icons/fa";
 import Modal from "../../components/organisms/modal";
-import BanderaEs from "../../assets/banderaes.svg";
+import { useNavigate } from "react-router-dom"; 
 import "../../css/styles.css";
 
 function Header({
@@ -11,21 +11,25 @@ function Header({
   txtIdioma,
   bodyOverflowHidden,
 }) {
-  const { Inicio, SobreMi, Proyectos, Contacto } = txtIdioma.header;
+  const { INICIO, TACOS, REFRESCOS, Contacto } = txtIdioma.header;
   const { copiado, copiadoerror } = txtIdioma.otros;
 
-  // Estados
   const [modalVisible, setModalVisible] = useState(false);
   const [menuMobile, setMenuMobile] = useState(false);
   const [mostrarIdiomas, setMostrarIdiomas] = useState(false);
+
+  const navigate = useNavigate(); // Obtiene la función de navegación
+  
+  
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
     bodyOverflowHidden();
   };
 
-  const toggleIdiomas = () => {
-    setMostrarIdiomas(!mostrarIdiomas);
+  const toggleCarrito = () => {
+    navigate("/carrito");
+    toggleMenu(); 
   };
 
   const copiarUsuario = (usuario) => {
@@ -37,6 +41,21 @@ function Header({
     }
   };
 
+  const handleRefrescoClick = () => {
+    navigate("/refrescos");
+    toggleMenu(); 
+  };
+
+  const handleTacosClick = () => {
+    navigate("/tacos"); 
+    toggleMenu(); 
+  };
+
+  const handleInicioClick = () => {
+    navigate("/"); 
+    toggleMenu(); 
+  };
+
   const toggleMenu = () => {
     if (window.innerWidth <= 768) {
       setMenuMobile(!menuMobile);
@@ -46,30 +65,27 @@ function Header({
 
   return (
     <header>
-      {/* Titulo */}
-      <h2 className="header-titulo">{"< EMAjsx />"}</h2>
-      {/* Menu */}
+      <h2 className="header-titulo">{"TACO FACIL"}</h2>
       <nav className={menuMobile ? "show-nav" : null}>
         <ul>
+        <li>
+          <a href="#inicio" onClick={handleInicioClick}>
+            {INICIO}
+          </a>
+        </li>
           <li>
-            <a href="#inicio" onClick={toggleMenu}>
-              {Inicio}
-            </a>
-          </li>
+          <a href="#tacos" onClick={handleTacosClick}>
+            {TACOS}
+          </a>
+        </li>
           <li>
-            <a href="#aboutme" onClick={toggleMenu}>
-              {SobreMi}
-            </a>
-          </li>
-          <li>
-            <a href="#proyectos" onClick={toggleMenu}>
-              {Proyectos}
+            <a href="#refresco" onClick={handleRefrescoClick}>
+              {REFRESCOS}
             </a>
           </li>
         </ul>
       </nav>
       <div className="botones-header">
-        {/* Botón Contacto */}
         <button
           className={"boton-contacto " + (menuMobile ? "show-btn" : "")}
           onClick={() => {
@@ -79,26 +95,24 @@ function Header({
         >
           {Contacto}
         </button>
-        {/* Botón Dark-Mode */}
         <button
-          className={`dark-mod-boton ${darkMode ? "dark-mode" : ""} ${menuMobile ? "show-btn" : ""
-            }`}
+          className={`dark-mod-boton ${darkMode ? "dark-mode" : ""} ${
+            menuMobile ? "show-btn" : ""
+          }`}
           onClick={cambiarModo}
         >
           {darkMode ? <FiSun /> : <FiMoon />}
         </button>
-        {/* Botón Idioma */}
         <div>
-          <button
-            className={"boton-idioma " + (menuMobile ? "show-btn" : "")}
-            onClick={() => toggleIdiomas()}
+        <button
+            className={"boton-carrito " + (menuMobile ? "show-btn" : "")}
+            style={{ color: darkMode ? "white" : "black" }}
+            onClick={() => toggleCarrito()}
           >
-
-            <HiOutlineTranslate />
+            <FaShoppingCart /> 
           </button>
         </div>
       </div>
-      {/* Menu Hamburguesa */}
       <div
         className={menuMobile ? "hamburguesa hamburguesa--show" : "hamburguesa"}
         onClick={toggleMenu}
@@ -107,7 +121,6 @@ function Header({
         <span className="linea"></span>
         <span className="linea"></span>
       </div>
-      {/* Modal */}
       <Modal
         modalVisible={modalVisible}
         cerrarModal={toggleModal}

@@ -1,13 +1,15 @@
-import { FaGithub, FaInstagram, FaDiscord, FaTwitch } from "react-icons/fa";
-import FooterButton from "../molecules/footerbutton";
-import "../../css/styles.css";
+import React from 'react';
+import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa'; 
+import FooterButton from '../molecules/footerboton';
+import taqueriaLogo from '../../assets/inconos.png';
+import '../../css/styles.css';
 
 function Footer() {
   return (
     <footer>
-      <p className="footer-titulo">EMAjsx 2004</p>
+      <p className="footer-titulo">Redes Sociales "TAQUERIA TAPILULA"</p>
       <div className="footer-buttons">
-      <FooterButton
+        <FooterButton
           link={"https://github.com/settings/profile"}
           titulo="Github"
           icono={FaGithub}
@@ -18,11 +20,15 @@ function Footer() {
           icono={FaInstagram}
         />
         <FooterButton
-          link={"https://discord.com/channels/@me"}
-          titulo="Discord"
-          icono={FaDiscord}
+          link={"https://www.facebook.com/tu_pagina_de_facebook"}
+          titulo="Facebook"
+          icono={FaFacebook} 
         />
-        
+      </div>
+      <p className="footer-direccion">Dirección: 161 Cedro Sur, Patria Nueva, 29045 Tuxtla</p>
+      <div className="footer-empresa">
+      <img src={taqueriaLogo} alt="Logo de la empresa" />
+        <p>TACO FÁCIL</p>
       </div>
     </footer>
   );
